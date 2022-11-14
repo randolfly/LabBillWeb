@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "tbUtBTxfIEuwMUxAcseewGottHVEvivV1P28xZBt9cA=",
+  "Source": "LabBill.Server",
+  "BasePath": "_content/LabBill.Server",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
