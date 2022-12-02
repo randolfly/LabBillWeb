@@ -15,6 +15,11 @@ public class DataContext : DbContext {
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Bill>()
+            .HasMany(b => b.Persons)
+            .WithMany(p => p.Bills)
+            .UsingEntity(j => j.ToTable("BillPersons"));
+
         var persons = new List<Person>
         {
             new Person
@@ -82,7 +87,7 @@ public class DataContext : DbContext {
             {
                 Id = 1,
                 BillState = BillState.Done,
-                BillType = RbsType.RBS,
+                BillType = RbsType.Rbs,
                 Brief = "测试1",
                 Detail = "asaa",
                 Price = 10m
@@ -91,7 +96,7 @@ public class DataContext : DbContext {
             {
                 Id = 2,
                 BillState = BillState.Todo,
-                BillType = RbsType.NRBS,
+                BillType = RbsType.Nrbs,
                 Brief = "测试2",
                 Detail = "asaa222",
                 Price = -100m

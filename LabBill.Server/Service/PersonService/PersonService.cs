@@ -21,31 +21,26 @@ public class PersonService : IPersonService {
             Data = persons
         };
     }
-    public async Task<ServiceResponse<Person?>> GetPersonById(int personId)
+    public async Task<ServiceResponse<Person>> GetPersonById(int personId)
     {
-        var result = new Person();
-        string message = String.Empty;
-        bool state = true;
-        try
+        var response = new ServiceResponse<Person>();
+        var person = await _dataContext.Persons.FirstOrDefaultAsync(a => a.Id.Equals(personId));
+        if (person == null)
         {
-            result = await _dataContext.Persons.FirstAsync(p => p.Id.Equals(personId));
+            response.Success = false;
+            response.Message = "Sorry, asset not exists.";
         }
-        catch (InvalidOperationException e)
+        else
         {
-            Console.WriteLine(e);
-            state = false;
-            message = "No Person Found, Please Check Id";
+            response.Data = person;
+            response.Success = true;
         }
-
-        return new ServiceResponse<Person?>
-        {
-            Data = result,
-            Success = state,
-            Message = message
-        };
+        return response;
     }
-    public async Task AddPerson(Person person)
+
+    public async Task UpdatePerson(Person person)
     {
-        await _dataContext.Persons.AddAsync(person);
+        _dataContext.Persons.Update(person);
+        await _dataContext.SaveChangesAsync();
     }
 }
