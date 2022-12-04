@@ -1,6 +1,7 @@
 using LabBill.Server.Data;
 using LabBill.Server.Service.AssetService;
 using LabBill.Server.Service.BillService;
+using LabBill.Server.Service.HelperService;
 using LabBill.Server.Service.PersonService;
 using LabBill.Shared.Model;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +16,7 @@ builder.Services.AddDbContext<DataContext>(options => {
 builder.Services.AddScoped<IPersonService, PersonService>();
 builder.Services.AddScoped<IAssetService, AssetService>();
 builder.Services.AddScoped<IBillService, BillService>();
+builder.Services.AddScoped<IHelperService, HelperService>();
 
 builder.Services.AddControllers();
 // builder.Services.AddControllers().AddJsonOptions(x =>

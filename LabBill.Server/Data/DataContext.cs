@@ -1,13 +1,23 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using LabBill.Shared.Model;
 
+
 namespace LabBill.Server.Data;
 
 public class DataContext : DbContext {
     public DbSet<Bill> Bills { get; set; }
     public DbSet<Person> Persons { get; set; }
+    public DbSet<BillPerson> BillPersons { get; set; }
     public DbSet<Asset> Assets { get; set; }
     public DbSet<BillType> BillTypes { get; set; }
+
+    public static readonly ILoggerFactory ConsoleLoggerFactory =
+        LoggerFactory.Create(builder => {
+            builder.AddFilter((category, level) =>
+                    category == DbLoggerCategory.Database.Command.Name
+                    && level == LogLevel.Information)
+                .AddConsole();
+        });
 
     public DataContext(DbContextOptions<DataContext> options) : base(options)
     {
@@ -15,10 +25,13 @@ public class DataContext : DbContext {
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Bill>()
-            .HasMany(b => b.Persons)
-            .WithMany(p => p.Bills)
-            .UsingEntity(j => j.ToTable("BillPersons"));
+        modelBuilder.Entity<BillPerson>().HasKey(x => new
+            {
+                x.BillId,
+                x.PersonId
+            }
+        );
+
 
         var persons = new List<Person>
         {
@@ -105,5 +118,6 @@ public class DataContext : DbContext {
 
         modelBuilder.Entity<Bill>().HasData(bills);
     }
+
 
 }

@@ -17,28 +17,13 @@ namespace LabBill.Server.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.0");
 
-            modelBuilder.Entity("BillPerson", b =>
-                {
-                    b.Property<int>("BillsId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("PersonsId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("BillsId", "PersonsId");
-
-                    b.HasIndex("PersonsId");
-
-                    b.ToTable("BillPersons", (string)null);
-                });
-
             modelBuilder.Entity("LabBill.Shared.Model.Asset", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("BillId")
+                    b.Property<int?>("BillId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Comment")
@@ -107,6 +92,21 @@ namespace LabBill.Server.Migrations
                             Detail = "asaa222",
                             Price = -100m
                         });
+                });
+
+            modelBuilder.Entity("LabBill.Shared.Model.BillPerson", b =>
+                {
+                    b.Property<int>("BillId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("PersonId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("BillId", "PersonId");
+
+                    b.HasIndex("PersonId");
+
+                    b.ToTable("BillPersons");
                 });
 
             modelBuilder.Entity("LabBill.Shared.Model.BillType", b =>
@@ -208,28 +208,30 @@ namespace LabBill.Server.Migrations
                         });
                 });
 
-            modelBuilder.Entity("BillPerson", b =>
-                {
-                    b.HasOne("LabBill.Shared.Model.Bill", null)
-                        .WithMany()
-                        .HasForeignKey("BillsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("LabBill.Shared.Model.Person", null)
-                        .WithMany()
-                        .HasForeignKey("PersonsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("LabBill.Shared.Model.Asset", b =>
                 {
                     b.HasOne("LabBill.Shared.Model.Bill", null)
                         .WithMany("Assets")
+                        .HasForeignKey("BillId");
+                });
+
+            modelBuilder.Entity("LabBill.Shared.Model.BillPerson", b =>
+                {
+                    b.HasOne("LabBill.Shared.Model.Bill", "Bill")
+                        .WithMany("BillPersons")
                         .HasForeignKey("BillId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("LabBill.Shared.Model.Person", "Person")
+                        .WithMany("BillPersons")
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Bill");
+
+                    b.Navigation("Person");
                 });
 
             modelBuilder.Entity("LabBill.Shared.Model.BillType", b =>
@@ -243,7 +245,14 @@ namespace LabBill.Server.Migrations
                 {
                     b.Navigation("Assets");
 
+                    b.Navigation("BillPersons");
+
                     b.Navigation("BillTypes");
+                });
+
+            modelBuilder.Entity("LabBill.Shared.Model.Person", b =>
+                {
+                    b.Navigation("BillPersons");
                 });
 #pragma warning restore 612, 618
         }
