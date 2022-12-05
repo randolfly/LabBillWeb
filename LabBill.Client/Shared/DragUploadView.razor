@@ -1,0 +1,101 @@
+@implements IAsyncDisposable
+@inject IJSRuntime JS
+@inject IWebHostEnvironment HostEnvironment
+
+@* <InputFile OnChange="OnChange" class="form-control" multiple @ref="InputFile"/> *@
+<div @ref="UploadElement" style="padding: 20px; width: 200px; height: 200px; background-color: cornflowerblue; border: 
+2px dashed #0087F7; border-radius: 5px; ">
+    <p>拖放上传文件</p>
+    <InputFile OnChange="OnChange" class="form-control" multiple @ref="InputFile" hidden="true"/>
+</div>
+
+<pre>
+    <code>
+            @UploadStatus
+    </code>
+</pre>
+
+@code {
+    // 参考：https://code-maze.com/upload-files-drag-drop-paste-blazor/#:~:text=Upload%20Files%20With%20Drag%20%26%20Drop%20or%20Paste,5%20Invoke%20JavaScript%20Functions%20with%20JS%20Interop%20
+    // https://zhuanlan.zhihu.com/p/496298474
+
+    // 参考 https://learn.microsoft.com/zh-cn/aspnet/core/blazor/components/event-handling?view=aspnetcore-7.0#prevent-default-actions
+    // 可以阻止默认操作
+    
+    // 参考 https://blazored.github.io/Modal/
+    // https://www.c-sharpcorner.com/article/modal-popup-window-in-blazor-webassembly/
+    // MARK: https://www.blazor.zone/modals 建议从这个入手
+    // 自定义popup?
+    
+    // TODO 重构代码
+    private ElementReference UploadElement { get; set; }
+    private InputFile? InputFile { get; set; }
+
+    private DotNetObjectReference<DragUploadView>? wrapper;
+
+    private IJSObjectReference? module;
+
+    private IJSObjectReference? dropInstance;
+
+    private string UploadPath { get; set; } = string.Empty;
+    public string UploadStatus { get; set; } = string.Empty;
+
+    private long maxFileSize = 1024 * 1024 * 15;
+
+    protected override void OnAfterRender(bool firstRender) {
+        if (!firstRender) return;
+        UploadPath = Path.Combine(HostEnvironment.WebRootPath, "Upload");
+        if (!Directory.Exists(UploadPath)) Directory.CreateDirectory(UploadPath);
+    }
+
+    private async Task OnChange(InputFileChangeEventArgs obj) {
+        var i = 0;
+        var selectedFiles = obj.GetMultipleFiles(100);
+        foreach (var item in selectedFiles)
+        {
+            i++;
+            await OnSubmit(item);
+            UploadStatus += Environment.NewLine + $"[{i}]: " + item.Name;
+        }
+    }
+
+    private async Task OnSubmit(IBrowserFile? efile) {
+        if (efile == null) return;
+        var tempFileName = Path.Combine(UploadPath, efile.Name);
+        await using var fs = new FileStream(tempFileName, FileMode.Create);
+        await using var stream = efile.OpenReadStream(maxFileSize);
+        await stream.CopyToAsync(fs);
+        // 参考 https://learn.microsoft.com/zh-cn/aspnet/core/blazor/components/event-handling?view=aspnetcore-7.0
+        // 可以不用手动调用StateChanged
+        // StateHasChanged();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender) {
+        if (!firstRender) return;
+        module = await JS.InvokeAsync<IJSObjectReference>("import", "./lib/drag/app.js");
+        wrapper = DotNetObjectReference.Create(this);
+        dropInstance = await module.InvokeAsync<IJSObjectReference>("init", wrapper, UploadElement, InputFile!.Element);
+    }
+
+    [JSInvokable] public void DropAlert(string msg) {
+        UploadStatus += Environment.NewLine + "[!Alert!]: " + msg;
+        StateHasChanged();
+    }
+
+    public async ValueTask DisposeAsync() {
+        if (dropInstance != null)
+        {
+            await dropInstance.InvokeVoidAsync("dispose");
+            await dropInstance.DisposeAsync();
+        }
+        if (wrapper != null)
+        {
+            wrapper.Dispose();
+        }
+
+        if (module != null)
+        {
+            await module.DisposeAsync();
+        }
+    }
+}
