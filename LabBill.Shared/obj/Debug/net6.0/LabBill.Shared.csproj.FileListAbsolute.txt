@@ -22,3 +22,15 @@ E:\Code\C#\Tool\LabManager\Blazor\LabBill.Shared\obj\Debug\net6.0\LabBill.Shared
 E:\Code\C#\Tool\LabManager\Blazor\LabBill.Shared\obj\Debug\net6.0\refint\LabBill.Shared.dll
 E:\Code\C#\Tool\LabManager\Blazor\LabBill.Shared\obj\Debug\net6.0\LabBill.Shared.pdb
 E:\Code\C#\Tool\LabManager\Blazor\LabBill.Shared\obj\Debug\net6.0\ref\LabBill.Shared.dll
+E:\Code\C#\Tool\LabBillWeb\LabBill.Shared\bin\Debug\net6.0\LabBill.Shared.deps.json
+E:\Code\C#\Tool\LabBillWeb\LabBill.Shared\bin\Debug\net6.0\LabBill.Shared.dll
+E:\Code\C#\Tool\LabBillWeb\LabBill.Shared\bin\Debug\net6.0\LabBill.Shared.pdb
+E:\Code\C#\Tool\LabBillWeb\LabBill.Shared\obj\Debug\net6.0\LabBill.Shared.csproj.AssemblyReference.cache
+E:\Code\C#\Tool\LabBillWeb\LabBill.Shared\obj\Debug\net6.0\LabBill.Shared.GeneratedMSBuildEditorConfig.editorconfig
+E:\Code\C#\Tool\LabBillWeb\LabBill.Shared\obj\Debug\net6.0\LabBill.Shared.AssemblyInfoInputs.cache
+E:\Code\C#\Tool\LabBillWeb\LabBill.Shared\obj\Debug\net6.0\LabBill.Shared.AssemblyInfo.cs
+E:\Code\C#\Tool\LabBillWeb\LabBill.Shared\obj\Debug\net6.0\LabBill.Shared.csproj.CoreCompileInputs.cache
+E:\Code\C#\Tool\LabBillWeb\LabBill.Shared\obj\Debug\net6.0\LabBill.Shared.dll
+E:\Code\C#\Tool\LabBillWeb\LabBill.Shared\obj\Debug\net6.0\refint\LabBill.Shared.dll
+E:\Code\C#\Tool\LabBillWeb\LabBill.Shared\obj\Debug\net6.0\LabBill.Shared.pdb
+E:\Code\C#\Tool\LabBillWeb\LabBill.Shared\obj\Debug\net6.0\ref\LabBill.Shared.dll

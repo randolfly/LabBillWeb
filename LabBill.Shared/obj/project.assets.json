@@ -8,23 +8,23 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\rando\\.nuget\\packages\\": {},
+    "C:\\Users\\randolf\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Code\\C#\\Tool\\LabManager\\Blazor\\LabBill.Shared\\LabBill.Shared.csproj",
+      "projectUniqueName": "E:\\Code\\C#\\Tool\\LabBillWeb\\LabBill.Shared\\LabBill.Shared.csproj",
       "projectName": "LabBill.Shared",
-      "projectPath": "E:\\Code\\C#\\Tool\\LabManager\\Blazor\\LabBill.Shared\\LabBill.Shared.csproj",
-      "packagesPath": "C:\\Users\\rando\\.nuget\\packages\\",
-      "outputPath": "E:\\Code\\C#\\Tool\\LabManager\\Blazor\\LabBill.Shared\\obj\\",
+      "projectPath": "E:\\Code\\C#\\Tool\\LabBillWeb\\LabBill.Shared\\LabBill.Shared.csproj",
+      "packagesPath": "C:\\Users\\randolf\\.nuget\\packages\\",
+      "outputPath": "E:\\Code\\C#\\Tool\\LabBillWeb\\LabBill.Shared\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\rando\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\randolf\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -33,6 +33,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -56,8 +57,7 @@
           "net47",
           "net471",
           "net472",
-          "net48",
-          "net481"
+          "net48"
         ],
         "assetTargetFallback": true,
         "warn": true,
@@ -66,7 +66,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.306\\RuntimeIdentifierGraph.json"
       }
     }
   }

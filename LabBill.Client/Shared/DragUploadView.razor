@@ -3,8 +3,7 @@
 @inject IWebHostEnvironment HostEnvironment
 
 @* <InputFile OnChange="OnChange" class="form-control" multiple @ref="InputFile"/> *@
-<div @ref="UploadElement" style="padding: 20px; width: 200px; height: 200px; background-color: cornflowerblue; border: 
-2px dashed #0087F7; border-radius: 5px; ">
+<div @ref="UploadElement" class="drop-upload">
     <p>拖放上传文件</p>
     <InputFile OnChange="OnChange" class="form-control" multiple @ref="InputFile" hidden="true"/>
 </div>

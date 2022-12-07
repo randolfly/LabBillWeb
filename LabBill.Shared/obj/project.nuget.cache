@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "lD9i4IQOsw6bIo9giGWicYB66+p/VFfTOzPXgZhdmBvUmkYbzWKiDmfUod8JbyxiU3KDWQjHcChCY+wV5Ve1QQ==",
+  "dgSpecHash": "rDDZoHUSjq1UiXE3O0j9HWDvqljR2RRfE2jT5gdCdRohNDiglYf3f4gU2GgRIqf2RZ8+U/zA43VYCp7qrvKXIg==",
   "success": true,
-  "projectFilePath": "E:\\Code\\C#\\Tool\\LabManager\\Blazor\\LabBill.Shared\\LabBill.Shared.csproj",
+  "projectFilePath": "E:\\Code\\C#\\Tool\\LabBillWeb\\LabBill.Shared\\LabBill.Shared.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

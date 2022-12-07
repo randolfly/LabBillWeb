@@ -1,10 +1,14 @@
 export function init(wrapper, element, inputFile) {
     // 阻止浏览器默认行为
+    document.addEventListener("drag", function (e) {
+        e.preventDefault();
+    }, false);
     document.addEventListener("dragleave", function (e) {
         e.preventDefault();
     }, false);
     document.addEventListener("drop", function (e) {
         e.preventDefault();
+        return false;//禁止浏览器默认行为
     }, false);
     document.addEventListener("dragenter", function (e) {
         e.preventDefault();
@@ -37,6 +41,7 @@ export function init(wrapper, element, inputFile) {
 
     return {
         dispose: () => {
+            element.removeEventListener('drag', onDrag);
             element.removeEventListener('dragleave', onDragLeave);
             element.removeEventListener("drop", onDrop);
             element.removeEventListener('dragenter', onDragHover);
